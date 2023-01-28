@@ -17,5 +17,3 @@ function getPictureInfo(index) {
     pictures.appendChild(cloneTemplate);
     
 }
-console.log(data[5].url);
-console.log(commentArray)
