@@ -1,5 +1,5 @@
 const countOfOffers = 25;
-const countOfComments = 5;
+const countOfComments = 25;
 
 const descriptions = ["Це літо було чудовим", "Фотка з минулого року",
     "Дуже сумую за цими емоціями", "Сподіваюсь, що я там не був лише один раз"];
@@ -14,7 +14,7 @@ const comments = ["Все відмінно!", "Загалом все непог�
     "Обличчя людей на фотці перекошені, ніби їх побивають. Як можна було зловити такий невдалий момент?"];
 
 const data = new Array(countOfOffers).fill(null).map((e,index)=> getOffer(index))
-const comment = new Array(countOfComments).fill(null).map((e, index) => getComment(index))
+const commentArray = new Array(countOfComments).fill(null).map((e, index) => getComment(index))
 
 function getRandomNumber(min, max) {
     const step1 = max - min + 1;
@@ -35,20 +35,21 @@ function getRandomArray(arrayLenght, arrayMax) {
 }
 
 
+
 function getRandomDescription() {
     const randomArrayNumber = getRandomNumber(0, descriptions.length -1)
     const randomDescription = descriptions[randomArrayNumber];
     return randomDescription
 }
 
-const urlArray = getRandomArray(25, 25);
 
 
 function getOffer(index){
-    for (let i = 0; i < urlArray.length; i++) {
+    const urlArray = getRandomArray(25, 25);
+    for (let i = 0; i < urlArray.length -1; i++) {
     return {
         id: index+1,
-        url: `photos/${urlArray[i]+1}.jpg`,     
+        url: `photos/${index+1}.jpg`,     
         description: getRandomDescription(),
         likes: getRandomNumber(15, 200),
     }
@@ -67,16 +68,19 @@ function getRandomName() {
     return RandomName
 }
 
-const avatarArray = getRandomArray(6, 6)
 
 function getComment(index) {
-    for (let i = 0; i < avatarArray.length; i++) {
+    const avatarArray = getRandomArray(6, 6)
+
+    for (let i = 0; i < avatarArray.length-1; i++) {
         return {
             id: index + 1,
             avatar: `img/avatar-${avatarArray[i] + 1}.svg`,
-            comment: getRandomComment(),
+            message: getRandomComment(),
+            comment: getRandomNumber(1, 25),
             name: getRandomName()
 
         }
     }
 }
+export{data, countOfOffers, countOfComments, commentArray};
