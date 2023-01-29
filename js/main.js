@@ -45,15 +45,12 @@ function getRandomDescription() {
 
 
 function getOffer(index){
-    const urlArray = getRandomArray(25, 25);
-    for (let i = 0; i < urlArray.length -1; i++) {
     return {
         id: index+1,
         url: `photos/${index+1}.jpg`,     
         description: getRandomDescription(),
         likes: getRandomNumber(15, 200),
     }
-}
 }
 
 function getRandomComment() {
@@ -83,4 +80,4 @@ function getComment(index) {
         }
     }
 }
-export{data, countOfOffers, countOfComments, commentArray};
+export{data, commentArray};
