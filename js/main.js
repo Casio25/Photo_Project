@@ -16,6 +16,8 @@ const comments = ["Все відмінно!", "Загалом все непог�
 const data = new Array(countOfOffers).fill(null).map((e,index)=> getOffer(index))
 const commentArray = new Array(countOfComments).fill(null).map((e, index) => getComment(index))
 
+
+
 function getRandomNumber(min, max) {
     const step1 = max - min + 1;
     const step2 = Math.random() * step1;
@@ -65,19 +67,34 @@ function getRandomName() {
     return RandomName
 }
 
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
 
 function getComment(index) {
     const avatarArray = getRandomArray(6, 6)
-
+    const numberOfComments = getRandomNumber(0, 5)
+    const commentsListId = ((shuffle(comments)).slice(numberOfComments))
     for (let i = 0; i < avatarArray.length-1; i++) {
+        
         return {
             id: index + 1,
             avatar: `img/avatar-${avatarArray[i] + 1}.svg`,
-            message: getRandomComment(),
-            comment: getRandomNumber(1, 25),
+            comment: commentsListId.length,
+            message: commentsListId,
             name: getRandomName()
+
 
         }
     }
 }
 export{data, commentArray};
+console.log(commentArray);
+
