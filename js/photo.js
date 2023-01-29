@@ -4,6 +4,7 @@ import {data, commentArray} from "./main.js";
 const pictures = document.querySelector(".pictures");
 
 const pictureTemplate = document.querySelector("#picture");
+pictureTemplate.setAttribute("picture__id", data.id);
 const pictureImage = pictureTemplate.content.querySelector('.picture__img');
 const pictureComment = pictureTemplate.content.querySelector('.picture__comments')
 const pictureLikes = pictureTemplate.content.querySelector('.picture__likes');

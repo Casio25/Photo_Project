@@ -55,12 +55,6 @@ function getOffer(index){
     }
 }
 
-function getRandomComment() {
-    const randomArrayNumber = getRandomNumber(0, comments.length -1)
-    const RandomComment = comments[randomArrayNumber];
-    return RandomComment
-}
-
 function getRandomName() {
     const randomArrayNumber = getRandomNumber(0, names.length -1)
     const RandomName = names[randomArrayNumber];
@@ -78,9 +72,15 @@ function shuffle(a) {
     return a;
 }
 
+
+
+
 function getComment(index) {
+    while (comments.length < countOfComments-1) {
+        comments.push(...comments);
+    }
     const avatarArray = getRandomArray(6, 6)
-    const numberOfComments = getRandomNumber(0, 5)
+    const numberOfComments = getRandomNumber(0, comments.length-1)
     const commentsListId = ((shuffle(comments)).slice(numberOfComments))
     for (let i = 0; i < avatarArray.length-1; i++) {
         
@@ -88,7 +88,7 @@ function getComment(index) {
             id: index + 1,
             avatar: `img/avatar-${avatarArray[i] + 1}.svg`,
             comment: commentsListId.length,
-            message: commentsListId,
+            message: shuffle(commentsListId),
             name: getRandomName()
 
 
@@ -97,4 +97,3 @@ function getComment(index) {
 }
 export{data, commentArray};
 console.log(commentArray);
-
