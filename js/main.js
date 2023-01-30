@@ -1,6 +1,6 @@
 const countOfOffers = 25;
 const countOfComments = 25;
-
+const countOfAvatars = 6;
 const descriptions = ["Це літо було чудовим", "Фотка з минулого року",
     "Дуже сумую за цими емоціями", "Сподіваюсь, що я там не був лише один раз"];
 
@@ -13,7 +13,9 @@ const comments = ["Все відмінно!", "Загалом все непог�
     "Я послизнувся на банановій шкірці і впустив фотоапарат на кота і у мене вийшла фотографія краще.",
     "Обличчя людей на фотці перекошені, ніби їх побивають. Як можна було зловити такий невдалий момент?"];
 
-const data = new Array(countOfOffers).fill(null).map((e,index)=> getOffer(index))
+const data = new Array(countOfOffers).fill(null).map((e, index) => {
+    return getOffer(index);
+});
 const commentArray = new Array(countOfComments).fill(null).map((e, index) => getComment(index))
 
 
@@ -52,48 +54,24 @@ function getOffer(index){
         url: `photos/${index+1}.jpg`,     
         description: getRandomDescription(),
         likes: getRandomNumber(15, 200),
+        comments: getComment(getRandomNumber(1, countOfComments))
     }
 }
 
-function getRandomName() {
-    const randomArrayNumber = getRandomNumber(0, names.length -1)
-    const RandomName = names[randomArrayNumber];
-    return RandomName
-}
 
-function shuffle(a) {
-    let j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-    }
-    return a;
-}
+function getComment(countOfComments,) {
 
+    const ArrayOfComments=[];
+    for (let i = 0; i < countOfComments; i++) {
+        ArrayOfComments.push({
+            id: "c"+getRandomNumber(1, 999),
+            avatar: `img/avatar-${getRandomNumber(1, countOfAvatars)}.svg`,
+            comment: comments[getRandomNumber(1, comments.length-1)],
+            name: names[getRandomNumber(1, names.length-1)]
 
-
-
-function getComment(index) {
-    while (comments.length < countOfComments-1) {
-        comments.push(...comments);
-    }
-    const avatarArray = getRandomArray(6, 6)
-    const numberOfComments = getRandomNumber(0, comments.length-1)
-    const commentsListId = ((shuffle(comments)).slice(numberOfComments))
-    for (let i = 0; i < avatarArray.length-1; i++) {
-        
-        return {
-            id: index + 1,
-            avatar: `img/avatar-${avatarArray[i] + 1}.svg`,
-            comment: commentsListId.length,
-            message: shuffle(commentsListId),
-            name: getRandomName()
-
-
+        })
         }
+    return ArrayOfComments;
     }
-}
 export{data, commentArray};
 
