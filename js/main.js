@@ -96,4 +96,4 @@ function getComment(index) {
     }
 }
 export{data, commentArray};
-console.log(commentArray);
+
