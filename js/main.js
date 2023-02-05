@@ -1,3 +1,6 @@
+import {showBigPicture} from "./bigPhoto.js";
+
+
 const countOfOffers = 25;
 const countOfComments = 25;
 const countOfAvatars = 6;
@@ -74,4 +77,4 @@ function getComment(countOfComments,) {
     return ArrayOfComments;
     }
 export{data, commentArray};
-
+showBigPicture(data);

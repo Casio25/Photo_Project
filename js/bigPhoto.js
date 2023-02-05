@@ -1,5 +1,4 @@
 
-import{data, pictureData} from "./photo.js";
 
 const bigPicture = document.querySelector(".big-picture");
 const bigPictureImage = bigPicture.querySelector(".big-picture__img img");
@@ -14,23 +13,24 @@ const bigPictureSocialNumberofComments = bigPictureSocialComments.querySelector(
 const pictures = document.querySelector(".pictures");
 const HTMLbody = document.body;
 let photoId = undefined;
-let commentsHTML ="";
+let commentsHTML = "";
 
 
 
-function showBigPicture(data) {
-    pictures.addEventListener('click', (e)=>{
-        photoId = e.target.dataset.id-1;
-        if(isNaN(photoId)){
-        }else{
-        bigPicture.classList.remove('hidden');
-        bigPictureImage.src = data[photoId].url;
-        bigPictureSocialLikes.textContent = data[photoId].likes;
-        bigPictureSocialNumberofComments.textContent= data[photoId].comments.length;
-        bigPictureSocialDescription.textContent = data[photoId].description;
-        HTMLbody.classList.add("modal-open");
+export function showBigPicture(bigPictureArray) {
+    pictures.addEventListener('click', (e) => {
+        photoId = e.target.dataset.id - 1;
+        if (isNaN(photoId)) {
+        } else {
+            bigPicture.classList.remove('hidden');
+            const pictureArray = bigPictureArray[photoId];
+            bigPictureImage.src = pictureArray.url;
+            bigPictureSocialLikes.textContent = pictureArray.likes;
+            bigPictureSocialNumberofComments.textContent = pictureArray.comments.length;
+            bigPictureSocialDescription.textContent = pictureArray.description;
+            HTMLbody.classList.add("modal-open");
 
-            data[photoId].comments.forEach((comment) => {
+            pictureArray.comments.forEach((comment) => {
                 commentsHTML += `
         <li class="social__comment" data-post-id="${comment.id}">
             <img class="social__picture" src="${comment.avatar}" alt="${comment.name}" width="35" height="35">
@@ -48,16 +48,16 @@ function showBigPicture(data) {
         bigPicture.classList.add('hidden');
         HTMLbody.classList.remove("modal-open");
         closeButton.removeEventListener('click', closeBigPicture);
+        commentsHTML = ""
     }
-    closeButton.addEventListener('click', () =>{
+    closeButton.addEventListener('click', () => {
         closeBigPicture();
     })
-    HTMLbody.addEventListener('keydown', (e)=>{
-    if(e.keyCode === 27){
-       closeBigPicture();
-    }
+    HTMLbody.addEventListener('keydown', (e) => {
+        if (e.keyCode === 27) {
+            closeBigPicture();
+        }
     })
-    
+
 }
 
-showBigPicture(data)
