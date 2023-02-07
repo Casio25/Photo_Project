@@ -6,6 +6,8 @@ const imageUploadClose = document.querySelector(".img-upload__cancel");
 
 const userHashtagsAndComments = document.querySelector(".img-upload__text");
 const userHashTags = userHashtagsAndComments.querySelector(".text__hashtags");
+const maxHashtagSize = 5;
+const minHashtagSize = 1;
 
 export function ImageUpload(){
     imageIsUploaded.addEventListener('change', function (e) {
@@ -38,7 +40,7 @@ export function ImageUpload(){
                 evt.target.setCustomValidity("No # as first symbol");
                 evt.target.reportValidity();
             }
-            if (elemArray.length === 0){
+            if (elemArray.length-1 < minHashtagSize){
                 evt.target.setCustomValidity("Кожен # повинен складатись мінімум з 2 символів");
                 evt.target.reportValidity();
                 
