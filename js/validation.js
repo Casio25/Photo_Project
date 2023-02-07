@@ -32,7 +32,6 @@ export function ImageUpload(){
         
     }
     function checkHashtag(tagsArray, evt){
-        let result = true;
         tagsArray.forEach (function (elem, index, array) {
             const elemArray = elem.split("");
             console.log(elemArray);
