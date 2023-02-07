@@ -40,7 +40,7 @@ export function ImageUpload(){
                 evt.target.setCustomValidity("No # as first symbol");
                 evt.target.reportValidity();
             }
-            if (elemArray.length-1 < minHashtagSize){
+            if (elemArray.length-1 <= minHashtagSize){
                 evt.target.setCustomValidity("Кожен # повинен складатись мінімум з 2 символів");
                 evt.target.reportValidity();
                 
