@@ -1,5 +1,5 @@
 import {showBigPicture} from "./bigPhoto.js";
-
+import { ImageUpload } from "./validation.js";
 
 const countOfOffers = 25;
 const countOfComments = 25;
@@ -78,3 +78,4 @@ function getComment(countOfComments,) {
     }
 export{data, commentArray};
 showBigPicture(data);
+ImageUpload();
