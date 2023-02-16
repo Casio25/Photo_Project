@@ -43,7 +43,6 @@ export function showBigPicture(bigPictureArray) {
 
             /* Making comment length check*/
             function loadAllComments(){
-                console.log(pictureArray.comments)
                 pictureArray.comments.forEach((comment) => {
                     commentsHTML += `
         <li class="social__comment" data-post-id="${comment.id}">
@@ -74,15 +73,34 @@ export function showBigPicture(bigPictureArray) {
                 }
             }
 
-            function getAllComments(){
-                bigPictureLoadCommennts.addEventListener('click', function() {
-                    equalFive += 5;
-                    commentsHTML = "";
-                    loadFiveComments(equalFive);
-                    commentsCountHTML = `${slicedPictureArray.length} из <span class="comments - count"> ${pictureArray.comments.length + " "} </span> комментарів`;
-                    bigPictureSocialComments.innerHTML = commentsCountHTML;
+            function addingFive() {
+                equalFive += 5;
+                commentsHTML = "";
+                loadFiveComments(equalFive);
+                commentsCountHTML = `${slicedPictureArray.length} из <span class="comments - count"> ${pictureArray.comments.length + " "} </span> комментарів`;
+                bigPictureSocialComments.innerHTML = commentsCountHTML;
 
+            }
+
+            function getAllComments(){
+                bigPictureLoadCommennts.addEventListener('click', addingFive);
+                 function closeBigPictureEvent() {
+                    bigPicture.classList.add('hidden');
+                    HTMLbody.classList.remove("modal-open");
+                    closeButton.removeEventListener('click', closeBigPictureEvent);
+                     bigPictureLoadCommennts.removeEventListener('click', addingFive);
+                    bigPictureLoadCommennts.classList.remove("hidden");
+                    bigPictureSocialComments.classList.remove("hidden");
+                }
+                closeButton.addEventListener('click', () => {
+                    closeBigPictureEvent();
                 })
+                HTMLbody.addEventListener('keydown', (e) => {
+                    if (e.keyCode === 27) {
+                        closeBigPictureEvent();
+                    }
+                })
+
                 /*making loadAllComments function*/
                 if (pictureArray.comments.length < equalFive){
                     console.log("less than 5");
@@ -108,6 +126,8 @@ export function showBigPicture(bigPictureArray) {
         closeButton.removeEventListener('click', closeBigPicture);
         commentsHTML = "";
         equalFive = 5;
+        slicedPictureArray = undefined;
+        bigPictureSocialComments.innerHTML = "";
         bigPictureLoadCommennts.classList.remove("hidden");
         bigPictureSocialComments.classList.remove("hidden");
     }
