@@ -70,7 +70,6 @@ export function showBigPicture(bigPictureArray) {
             }
 
             function getAllComments(){
-                let count = pictureArray.comments.length > 5 ? 5 : pictureArray.comments.length;
                 bigPictureLoadCommennts.addEventListener('click', function() {
                     equalFive += 5;
                     commentsHTML = "";
