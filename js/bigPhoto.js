@@ -12,9 +12,12 @@ const bigPictureSocialLikes = bigPictureSocialReaction.querySelector(".likes-cou
 const bigPictureSocialComments = bigPictureSocial.querySelector(".social__comment-count");
 const bigPictureSocialNumberofComments = bigPictureSocialComments.querySelector(".comments-count");
 const pictures = document.querySelector(".pictures");
+const bigPictureLoadCommennts = document.querySelector(".social__comments-loader");
 const HTMLbody = document.body;
 let photoId = undefined;
 let commentsHTML = "";
+let equalFive = 5;
+let slicedPictureArray = undefined;
 
 
 
@@ -31,15 +34,61 @@ export function showBigPicture(bigPictureArray) {
             bigPictureSocialDescription.textContent = pictureArray.description;
             HTMLbody.classList.add("modal-open");
 
-            pictureArray.comments.forEach((comment) => {
-                commentsHTML += `
+            
+
+            /* Making comment length check*/
+            function loadAllComments(){
+                console.log(pictureArray.comments)
+                pictureArray.comments.forEach((comment) => {
+                    commentsHTML += `
         <li class="social__comment" data-post-id="${comment.id}">
             <img class="social__picture" src="${comment.avatar}" alt="${comment.name}" width="35" height="35">
             <p class="social__text">${comment.comment}</p>
         </li>`;
-            });
+                });
 
-            bigPicture.querySelector(".social__comments").innerHTML = commentsHTML;
+                bigPicture.querySelector(".social__comments").innerHTML = commentsHTML;
+            }
+
+            /*Function that load only five comments */
+            function loadFiveComments(equalFive){
+                console.log(` Length of all comments is ${pictureArray.comments.length}`)
+                slicedPictureArray = pictureArray.comments.slice(0, equalFive)
+                console.log(`Length of shown comments is ${slicedPictureArray.length}`);
+                slicedPictureArray.forEach((comment) => {
+                    commentsHTML += `
+        <li class="social__comment" data-post-id="${comment.id}">
+            <img class="social__picture" src="${comment.avatar}" alt="${comment.name}" width="35" height="35">
+            <p class="social__text">${comment.comment}</p>
+        </li>`;
+                });
+                bigPicture.querySelector(".social__comments").innerHTML = commentsHTML;
+                /* Hiding "Load more" button if all comments shown */
+                if (pictureArray.comments.length === slicedPictureArray.length){
+                    bigPictureLoadCommennts.classList.add("hidden");
+                }
+            }
+
+            function getAllComments(){
+                let count = pictureArray.comments.length > 5 ? 5 : pictureArray.comments.length;
+                bigPictureLoadCommennts.addEventListener('click', function() {
+                    equalFive += 5;
+                    commentsHTML = "";
+                    loadFiveComments(equalFive);
+                })
+                /*making loadAllComments function*/
+                if (pictureArray.comments.length < equalFive){
+                    console.log("less than 5");
+                    loadAllComments();
+                    bigPictureLoadCommennts.classList.add("hidden")
+                }else{
+                    console.log("more than 5");
+                    loadFiveComments(equalFive);
+                }
+            }
+            getAllComments();
+            
+
         }
 
 
@@ -49,7 +98,9 @@ export function showBigPicture(bigPictureArray) {
         bigPicture.classList.add('hidden');
         HTMLbody.classList.remove("modal-open");
         closeButton.removeEventListener('click', closeBigPicture);
-        commentsHTML = ""
+        commentsHTML = "";
+        equalFive = 5;
+        bigPictureLoadCommennts.classList.remove("hidden");
     }
     closeButton.addEventListener('click', () => {
         closeBigPicture();
