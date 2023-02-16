@@ -16,6 +16,7 @@ const bigPictureLoadCommennts = document.querySelector(".social__comments-loader
 const HTMLbody = document.body;
 let photoId = undefined;
 let commentsHTML = "";
+let commentsCountHTML = "";
 let equalFive = 5;
 let slicedPictureArray = undefined;
 
@@ -74,12 +75,16 @@ export function showBigPicture(bigPictureArray) {
                     equalFive += 5;
                     commentsHTML = "";
                     loadFiveComments(equalFive);
+                    commentsCountHTML = `${slicedPictureArray.length} из <span class="comments - count"> ${pictureArray.comments.length + " "} </span> комментарів`;
+                    bigPictureSocialComments.innerHTML = commentsCountHTML;
+
                 })
                 /*making loadAllComments function*/
                 if (pictureArray.comments.length < equalFive){
                     console.log("less than 5");
                     loadAllComments();
-                    bigPictureLoadCommennts.classList.add("hidden")
+                    bigPictureLoadCommennts.classList.add("hidden");
+                    bigPictureSocialComments.classList.add("hidden");
                 }else{
                     console.log("more than 5");
                     loadFiveComments(equalFive);
@@ -99,7 +104,9 @@ export function showBigPicture(bigPictureArray) {
         closeButton.removeEventListener('click', closeBigPicture);
         commentsHTML = "";
         equalFive = 5;
+        commentsCountHTML = "";
         bigPictureLoadCommennts.classList.remove("hidden");
+        bigPictureSocialComments.classList.remove("hidden");
     }
     closeButton.addEventListener('click', () => {
         closeBigPicture();
