@@ -33,6 +33,10 @@ export function showBigPicture(bigPictureArray) {
             bigPictureSocialLikes.textContent = pictureArray.likes;
             bigPictureSocialNumberofComments.textContent = pictureArray.comments.length;
             bigPictureSocialDescription.textContent = pictureArray.description;
+            /*Refreshing counter of comments */
+            slicedPictureArray = pictureArray.comments.slice(0, equalFive);
+            commentsCountHTML = `${slicedPictureArray.length} из <span class="comments - count"> ${pictureArray.comments.length + " "} </span> комментарів`;
+            bigPictureSocialComments.innerHTML = commentsCountHTML;
             HTMLbody.classList.add("modal-open");
 
             
@@ -54,7 +58,7 @@ export function showBigPicture(bigPictureArray) {
             /*Function that load only five comments */
             function loadFiveComments(equalFive){
                 console.log(` Length of all comments is ${pictureArray.comments.length}`)
-                slicedPictureArray = pictureArray.comments.slice(0, equalFive)
+                slicedPictureArray = pictureArray.comments.slice(0, equalFive);
                 console.log(`Length of shown comments is ${slicedPictureArray.length}`);
                 slicedPictureArray.forEach((comment) => {
                     commentsHTML += `
@@ -104,7 +108,6 @@ export function showBigPicture(bigPictureArray) {
         closeButton.removeEventListener('click', closeBigPicture);
         commentsHTML = "";
         equalFive = 5;
-        commentsCountHTML = "";
         bigPictureLoadCommennts.classList.remove("hidden");
         bigPictureSocialComments.classList.remove("hidden");
     }
