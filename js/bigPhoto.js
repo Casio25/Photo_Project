@@ -85,12 +85,9 @@ export function showBigPicture(bigPictureArray) {
             function getAllComments(){
                 bigPictureLoadCommennts.addEventListener('click', addingFive);
                  function closeBigPictureEvent() {
-                    bigPicture.classList.add('hidden');
-                    HTMLbody.classList.remove("modal-open");
                     closeButton.removeEventListener('click', closeBigPictureEvent);
                      bigPictureLoadCommennts.removeEventListener('click', addingFive);
-                    bigPictureLoadCommennts.classList.remove("hidden");
-                    bigPictureSocialComments.classList.remove("hidden");
+
                 }
                 closeButton.addEventListener('click', () => {
                     closeBigPictureEvent();
