@@ -1,5 +1,6 @@
 
 
+
 const bigPicture = document.querySelector(".big-picture");
 const bigPictureImage = bigPicture.querySelector(".big-picture__img img");
 const closeButton = document.querySelector(".big-picture__cancel")
