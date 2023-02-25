@@ -95,7 +95,7 @@ function photoSlider(start, step, filterMin, filterMax,){
 
 
 function applyFilter(HTMLname, filterName, start, step, filterMin, filterMax, measure){
-    catImage.classList.add(`effects__preview--${HTMLname}`);
+    catImage.classList.add(`Used effect-${HTMLname}`);
     effectLevelSlider.noUiSlider.destroy()
     photoSlider(start, step, filterMin, filterMax,);
     effectLevelSlider.noUiSlider.on("update", function (value) {
