@@ -12,6 +12,7 @@ let selectedEffect = undefined
 let scaleValueStep = 25;
 scaleValue.value = parseInt(scaleValue.value.match(/\d+/));
 
+
 photoSlider(1, 0.1, 0, 1);
 export function slider(){
     console.log("slider");
@@ -22,6 +23,7 @@ export function slider(){
 function increaseScale() {
     if (scaleValue.value < 100) {
         scaleValue.value = Number(scaleValue.value) + Number(scaleValueStep)
+        scaleValue.classList.add = `new_value-${scaleValue.value}` + "%";
 
         catImage.style.transform = `scale(${scaleValue.value / 100})`
     }
@@ -29,6 +31,7 @@ function increaseScale() {
 function scaleDown() {
     if (scaleValue.value > 25) {
         scaleValue.value = `${scaleValue.value - scaleValueStep}`;
+        scaleValue.classList.add = `new_value-${scaleValue.value}` + "%";
         catImage.style.transform = `scale(${scaleValue.value / 100})`
     }
 }
@@ -95,7 +98,7 @@ function photoSlider(start, step, filterMin, filterMax,){
 
 
 function applyFilter(HTMLname, filterName, start, step, filterMin, filterMax, measure){
-    catImage.classList.add(`Used effect-${HTMLname}`);
+    catImage.classList.add(`used_effect-${HTMLname}`);
     effectLevelSlider.noUiSlider.destroy()
     photoSlider(start, step, filterMin, filterMax,);
     effectLevelSlider.noUiSlider.on("update", function (value) {
