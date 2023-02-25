@@ -1,3 +1,4 @@
+import { slider } from "./slider.js";
 const imageUpload = document.querySelector(".img-upload")
 const imageUploadForm = imageUpload.querySelector(".img-upload__start");
 const imageIsUploaded = imageUploadForm.querySelector("#upload-file");
@@ -16,6 +17,7 @@ export function ImageUpload(){
         if (e.target.files[0]) {
             imageUploadOverlay.classList.remove("hidden");
             document.body.classList.add("modal-open");
+            slider();
         }
     })
     function validate(evt) {
