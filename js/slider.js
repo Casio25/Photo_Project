@@ -3,11 +3,10 @@
 const effects = document.querySelector(".img-upload__effects");
 const catImage = document.querySelector(".img-upload__preview img");
 const effectPreview = document.querySelector(".effect-level");
+const effectLevelValue = document.querySelector(".effect-level__value")
 const effectLevelSlider = document.querySelector(".effect-level__slider");
 const scaleValue = document.querySelector(".scale__control--value");
 const scale = document.querySelector(".img-upload__scale");
-const smallerScale = document.querySelector("scale__control--smaller");
-const biggerScale = document.querySelector(".scale__control--bigger");
 let selectedEffect = undefined
 let scaleValueStep = 25;
 scaleValue.value = parseInt(scaleValue.value.match(/\d+/));
@@ -77,6 +76,7 @@ function addFilter(){
             default:
                 effectLevelSlider.noUiSlider.destroy();
                 effectPreview.style.display = "none";
+                effectLevelSlider.style.display = "none";
                 break;
 
         }
@@ -103,6 +103,7 @@ function applyFilter(HTMLname, filterName, start, step, filterMin, filterMax, me
     photoSlider(start, step, filterMin, filterMax,);
     effectLevelSlider.noUiSlider.on("update", function (value) {
         catImage.style.filter = `${filterName}(${value}${measure})`;
+        effectLevelValue.value = `${value}`;
         console.log(value);
     });
     effectPreview.style.display = "block";
