@@ -1,3 +1,4 @@
+import { slider } from "./slider.js";
 const imageUpload = document.querySelector(".img-upload")
 const imageUploadForm = imageUpload.querySelector(".img-upload__start");
 const imageIsUploaded = imageUploadForm.querySelector("#upload-file");
@@ -7,6 +8,7 @@ const imageUploadClose = document.querySelector(".img-upload__cancel");
 const userHashtagsAndComments = document.querySelector(".img-upload__text");
 const userHashTags = userHashtagsAndComments.querySelector(".text__hashtags");
 const userComments = userHashtagsAndComments.querySelector(".text__description");
+const catImage = document.querySelector(".img-upload__preview img");
 const maxHashtagSize = 19;
 const minHashtagSize = 1;
 const maxCommentsSize = 140;
@@ -14,8 +16,18 @@ const maxCommentsSize = 140;
 export function ImageUpload(){
     imageIsUploaded.addEventListener('change', function (e) {
         if (e.target.files[0]) {
+            let reader = new FileReader();
+            reader.onloadend = function () {
+                catImage.src = reader.result;
+            }
+            if (e.target.files[0]) {
+                reader.readAsDataURL(e.target.files[0]);
+            } else {
+                preview.src = "";
+            }
             imageUploadOverlay.classList.remove("hidden");
             document.body.classList.add("modal-open");
+            slider();
         }
     })
     function validate(evt) {
