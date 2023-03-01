@@ -30,6 +30,8 @@ export function showBigPicture(bigPictureArray) {
             bigPicture.classList.remove('hidden');
             const pictureArray = bigPictureArray[photoId];
             bigPictureImage.src = pictureArray.url;
+            bigPictureImage.style.filter = pictureArray.filter;
+            bigPictureImage.style.scale = `${pictureArray.scale}%`
             bigPictureSocialLikes.textContent = pictureArray.likes;
             bigPictureSocialNumberofComments.textContent = pictureArray.comments.length;
             bigPictureSocialDescription.textContent = pictureArray.description;
