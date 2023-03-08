@@ -70,8 +70,8 @@ const data = await fetch('http://localhost:3000/data')
     .catch((error) => {
         return `${error}`;
     });
-const pictureData = data.map((e, index) => getPictureData(e, index));
-console.log(data);
+data.map((e, index) => getPictureData(e, index));
+
 
 
 

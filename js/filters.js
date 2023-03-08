@@ -4,6 +4,7 @@ const defaultFilter = document.querySelector("#filter-default");
 const randomFilter = document.querySelector("#filter-random");
 const popularFilter = document.querySelector("#filter-discussed");
 const NumberOfRandomPhotos = 10;
+const delayTime = 500;
 let filteredData = undefined;
 function shuffle(a) {
     var j, x, i;
@@ -23,12 +24,14 @@ function clearPhotos() {
 }
 function defFilter() {
     clearPhotos();
+    console.log(filterPhoto)
     shuffle(filterPhoto);
+    console.log(filterPhoto);
     filterPhoto.map((e, index) => getPictureData(e, index));
 }
 function popFilter(){
     clearPhotos();
-    const popularPhotos =filterPhoto.sort((a, b) => parseFloat(b.comments.length) - parseFloat(a.comments.length));
+    filterPhoto.sort((a, b) => parseFloat(b.comments.length) - parseFloat(a.comments.length));
     filterPhoto.map((e, index) => getPictureData(e, index));
 }
 
@@ -36,10 +39,8 @@ function uniqueFIlter() {
     clearPhotos();
         /*Show only 10 unique photo*/
         filteredData = [... new Map(filterPhoto.map((item) => [item["id"], item])).values(),];
-    shuffle(filteredData);
     filteredData = filteredData.slice(0, NumberOfRandomPhotos);
     filteredData.map((e, index) => getPictureData(e, index));
-    console.log(filteredData);
     }
 
 function debounce(callee, timeoutMs) {
@@ -52,9 +53,9 @@ function debounce(callee, timeoutMs) {
         this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs)
     }
 }
-const debouncedPopularPhotos = debounce(popFilter, 500);
-const debouncedRandomPhotos = debounce(uniqueFIlter, 500);
-const debouncedDefaultPhotos = debounce(defFilter, 500);
+const debouncedPopularPhotos = debounce(popFilter, delayTime);
+const debouncedRandomPhotos = debounce(uniqueFIlter, delayTime);
+const debouncedDefaultPhotos = debounce(defFilter, delayTime);
 
 export function sorted(){
     randomFilter.addEventListener('click', debouncedRandomPhotos)
